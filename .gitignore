@@ -1,0 +1,60 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ROS 2 / colcon
+# Top-level build products from colcon
+build/
+install/
+log/
+.colcon/
+.ros/
+
+# Generated setup files (local overlays)
+local_setup.*
+
+# CMake build artifacts
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Coverage and test
+.coverage
+coverage.xml
+
+# Virtual environments
+venv/
+.env/
+
+# ROS bag and other large data files
+*.bag
+
+# Rust
+# Compiled artifacts
+target/
+**/target/
+
+# Rust build artefacts and libs
+*.rlib
+*.so
+*.dylib
+*.dll
+
+# Cargo config and lockfiles: keep `Cargo.lock` in apps if you prefer deterministic builds.
+# Uncomment the next line if you do NOT want to commit Cargo.lock
+# Cargo.lock
+
+# Misc
+*.log
