@@ -8,13 +8,15 @@ find_package(std_msgs REQUIRED)
 # Build Rust project using Cargo
 add_custom_target(${PROJECT_NAME}_cargo ALL
   COMMAND cargo build --manifest-path ${CMAKE_CURRENT_SOURCE_DIR}/Cargo.toml
+  # COMMAND cargo build --release --manifest-path ${CMAKE_CURRENT_SOURCE_DIR}/Cargo.toml
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   COMMENT "Building Rust subscriber with Cargo"
 )
 
 # Install the binary
 install(
-  PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/target/release/${PROJECT_NAME}
+  PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/target/debug/${PROJECT_NAME}
+  # PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/target/release/${PROJECT_NAME}
   DESTINATION lib/${PROJECT_NAME}
 )
 
