@@ -34,9 +34,8 @@ sudo apt update && sudo apt install curl -y
 
 # 4. Install ros2-apt-source to Configure ROS 2 Repositories
 echo "Setting up ROS 2 apt source..."
-export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F '"tag_name"' | awk -F '"' '{print $4}')
-codename=$( . /etc/os-release && echo ${UBUNTU_CODENAME:-${VERSION_CODENAME}} )
-curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}_${codename}_all.deb"
+export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
+curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo ${UBUNTU_CODENAME:-${VERSION_CODENAME}})_all.deb"
 sudo dpkg -i /tmp/ros2-apt-source.deb
 rm /tmp/ros2-apt-source.deb
 
@@ -49,7 +48,11 @@ echo "Updating package index and upgrading system..."
 sudo apt update
 sudo apt upgrade -y
 
+
+
 # 7. Install ROS 2 Jazzy Desktop (Recommended) - Change to ros-jazzy-ros-base for minimal install
+echo "Installing ROS 2 Dev Tools..."
+sudo apt install ros-dev-tools -y
 echo "Installing ROS 2 Jazzy Desktop..."
 sudo apt install ros-jazzy-desktop -y
 
