@@ -55,6 +55,10 @@ echo "Installing ROS 2 Dev Tools..."
 sudo apt install ros-dev-tools -y
 echo "Installing ROS 2 Jazzy Desktop..."
 sudo apt install ros-jazzy-desktop -y
+# Install build essentials and clang/llvm
+sudo apt install build-essential clang libclang-dev llvm-dev -y
+# Also install ROS2 development tools if not already installed
+sudo apt install ros-jazzy-rcl ros-jazzy-rcutils -y
 
 # 8. Set Up the ROS 2 Environment Automatically
 echo "Setting up ROS 2 environment in ~/.bashrc..."
