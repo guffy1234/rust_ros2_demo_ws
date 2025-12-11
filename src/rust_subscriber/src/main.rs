@@ -1,8 +1,10 @@
 use r2r::*;
 use std::time::Duration;
+use futures_util::StreamExt;
+
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() -> std::result::Result<(), Box<dyn std::error::Error>> {
     // Initialize ROS2 context
     let ctx = Context::create()?;
     let mut node = Node::create(ctx, "rust_listener", "")?;
