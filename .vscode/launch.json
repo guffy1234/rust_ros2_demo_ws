@@ -1,0 +1,113 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Rust Publisher (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/install/rust_publisher/lib/rust_publisher/rust_publisher",
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "stopAtEntry": false,
+            "externalConsole": false,
+
+            "setupCommands": [
+                { "text": "handle SIGTRAP stop noprint nopass", "ignoreFailures": true },
+                { "text": "handle SIGPIPE nostop noprint pass", "ignoreFailures": true },
+                { "text": "handle SIGABRT stop noprint pass", "ignoreFailures": true }
+            ],
+
+            "environment": [
+                { "name": "RMW_IMPLEMENTATION", "value": "rmw_fastrtps_cpp" },
+                { "name": "AMENT_PREFIX_PATH", "value": "/opt/ros/jazzy:${workspaceFolder}/install" },
+                { "name": "LD_LIBRARY_PATH", "value": "/opt/ros/jazzy/lib:${workspaceFolder}/install/lib" },
+                { "name": "PYTHONPATH", "value": "/opt/ros/jazzy/lib/python3.10/site-packages:${workspaceFolder}/install/lib/python3.10/site-packages" },
+                { "name": "PATH", "value": "/opt/ros/jazzy/bin:${env:PATH}" }
+            ],
+
+            "preLaunchTask": "build_rust_publisher"
+        },
+        {
+            "name": "Rust Subscriber (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/install/rust_subscriber/lib/rust_subscriber/rust_subscriber",
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "stopAtEntry": false,
+            "externalConsole": false,
+
+            "setupCommands": [
+                { "text": "handle SIGTRAP stop noprint nopass", "ignoreFailures": true },
+                { "text": "handle SIGPIPE nostop noprint pass", "ignoreFailures": true },
+                { "text": "handle SIGABRT stop noprint pass", "ignoreFailures": true }
+            ],
+
+            "environment": [
+                { "name": "RMW_IMPLEMENTATION", "value": "rmw_fastrtps_cpp" },
+                { "name": "AMENT_PREFIX_PATH", "value": "/opt/ros/jazzy:${workspaceFolder}/install" },
+                { "name": "LD_LIBRARY_PATH", "value": "/opt/ros/jazzy/lib:${workspaceFolder}/install/lib" },
+                { "name": "PYTHONPATH", "value": "/opt/ros/jazzy/lib/python3.10/site-packages:${workspaceFolder}/install/lib/python3.10/site-packages" },
+                { "name": "PATH", "value": "/opt/ros/jazzy/bin:${env:PATH}" }
+            ],
+
+            "preLaunchTask": "build_rust_subscriber"
+        },
+        {
+            "name": "Rust Publisher",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/install/rust_publisher/lib/rust_publisher/rust_publisher",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "initCommands": [
+                "settings set target.process.thread.step-avoid-libraries true",
+                "breakpoint set -n __cxa_throw --disable",
+                "breakpoint set -n rust_panic --disable",
+                "breakpoint set -n core::result::unwrap_failed --disable",
+                "process handle SIGPIPE --stop false --pass true --notify false",
+                "process handle SIGTRAP --stop false --pass true --notify false",
+                "process handle SIGABRT --stop false --pass true --notify false"
+            ],
+            "env": {
+                "RMW_IMPLEMENTATION": "rmw_fastrtps_cpp",
+                "AMENT_PREFIX_PATH": "/opt/ros/jazzy:${workspaceFolder}/install:${env:AMENT_PREFIX_PATH}",
+                "LD_LIBRARY_PATH": "/opt/ros/jazzy/lib:${workspaceFolder}/install/rust_publisher/lib:${workspaceFolder}/install/lib:${env:LD_LIBRARY_PATH}",
+                "PYTHONPATH": "/opt/ros/jazzy/lib/python3.10/site-packages:${workspaceFolder}/install/lib/python3.10/site-packages:${env:PYTHONPATH}",
+                "PATH": "/opt/ros/jazzy/bin:${workspaceFolder}/install/rust_publisher/bin:${env:PATH}",
+                "COLCON_CURRENT_PREFIX": "${workspaceFolder}/install"
+            },
+            "preLaunchTask": "build_rust_publisher"
+        },
+        {
+            "name": "Rust Subscriber",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/install/rust_subscriber/lib/rust_subscriber/rust_subscriber",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopOnEntry": false,
+            "initCommands": [
+                "settings set target.process.thread.step-avoid-libraries true",
+                "breakpoint set -n __cxa_throw --disable",
+                "breakpoint set -n rust_panic --disable",
+                "breakpoint set -n core::result::unwrap_failed --disable",
+                "process handle SIGPIPE --stop false --pass true --notify false",
+                "process handle SIGTRAP --stop false --pass true --notify false",
+                "process handle SIGABRT --stop false --pass true --notify false"
+            ],
+            "env": {
+                "RMW_IMPLEMENTATION": "rmw_fastrtps_cpp",
+                "AMENT_PREFIX_PATH": "/opt/ros/jazzy:${workspaceFolder}/install:${env:AMENT_PREFIX_PATH}",
+                "LD_LIBRARY_PATH": "/opt/ros/jazzy/lib:${workspaceFolder}/install/rust_subscriber/lib:${workspaceFolder}/install/lib:${env:LD_LIBRARY_PATH}",
+                "PYTHONPATH": "/opt/ros/jazzy/lib/python3.10/site-packages:${workspaceFolder}/install/lib/python3.10/site-packages:${env:PYTHONPATH}",
+                "PATH": "/opt/ros/jazzy/bin:${workspaceFolder}/install/rust_subscriber/bin:${env:PATH}",
+                "COLCON_CURRENT_PREFIX": "${workspaceFolder}/install"
+            },
+            "preLaunchTask": "build_rust_subscriber"
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build All Packages",
+            "type": "shell",
+            "command": "source /opt/ros/jazzy/setup.bash && colcon build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Build entire ROS2 workspace"
+        },
+        {
+            "label": "Build Publisher",
+            "type": "shell",
+            "command": "source /opt/ros/jazzy/setup.bash && colcon build --packages-select rust_publisher",
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build only rust_publisher package"
+        },
+        {
+            "label": "Build Subscriber",
+            "type": "shell",
+            "command": "source /opt/ros/jazzy/setup.bash && colcon build --packages-select rust_subscriber",
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build only rust_subscriber package"
+        },
+        {
+            "label": "Clean Build",
+            "type": "shell",
+            "command": "rm -rf build/ install/ log/ && rm -rf src/*/target/",
+            "problemMatcher": [],
+            "detail": "Remove all build artifacts"
+        },
+        {
+            "label": "Source Workspace",
+            "type": "shell",
+            "command": "source install/setup.bash",
+            "problemMatcher": [],
+            "detail": "Source the workspace setup file"
+        },
+        {
+            "label": "build_rust_publisher",
+            "type": "shell",
+            "command": "source /opt/ros/jazzy/setup.bash && colcon build --packages-select rust_publisher && source install/setup.bash",
+            "problemMatcher": [],
+            "detail": "Build publisher for debugging"
+        },
+        {
+            "label": "build_rust_subscriber",
+            "type": "shell",
+            "command": "source /opt/ros/jazzy/setup.bash && colcon build --packages-select rust_subscriber && source install/setup.bash",
+            "problemMatcher": [],
+            "detail": "Build subscriber for debugging"
+        }
+    ]
+}
