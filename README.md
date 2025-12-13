@@ -14,22 +14,25 @@ This repository is a small demo showing how to build and run Rust-based ROS 2 no
 - [Troubleshooting](#troubleshooting)
 
 ## Project
-- **Description**: Demonstrates ROS 2 publisher/subscriber implemented in Rust using the `r2r` / `rclrs` (Rust client library) bindings. Use this to learn Rust + ROS 2 integration or as a starting point for your own Rust nodes.
+- **Description**: Demonstrates ROS 2 publisher/subscriber implemented in Rust using the `r2r` / `rclrs` bindings. Use this to learn Rust + ROS 2 integration or as a starting point for your own Rust nodes.
 
 ## Prerequisites
+- **Host / distro**: Ubuntu 24.04 is the tested target (recommended) — you can run it as a native install, inside a VM, or as a WSL2 distro on Windows.
 - **ROS 2 Jazzy**: Installed on the host (commonly in `/opt/ros/jazzy`).
 - **Rust toolchain**: `rustc`, `cargo` (use `rustup` to install/manage toolchains).
 - **colcon**: Used to build the workspace (and the Rust packages wrapped for ROS 2).
 - **Development tools**: Recommended — Visual Studio Code, CMake, build-essential packages.
 
 ## Quick Setup
-- The repository includes helper scripts to prepare the environment. From the repository root run:
+- The repository includes a Windows PowerShell helper `setup_distro.ps1` for Windows users. When run, the script installs Ubuntu 24.04 (no selection option), creates a user named `simuser` without a password and makes that user the default. Review the script before running.
+
+- The repository also includes helper scripts to prepare the environment. From the repository root run:
 
 ```bash
 bash ./setup_ros2_jazzy.sh
 ```
 
-- Additional setup scripts in the repo (run if you need them):
+- Additional setup scripts in the repo (run if needed):
 
 ```bash
 bash ./setup_rust.sh        # install rustup and toolchain
@@ -107,6 +110,9 @@ ls install/<package>/lib/<package>/
 ## VS Code Extensions (recommended)
 - `Rust Extension Pack` — provides the Rust language support, formatting, and useful tooling for editing and debugging Rust.
 - `CMake Tools` — makes editing, configuring and building CMake/CMakeLists-based projects (such as ROS 2 packages) inside VS Code much easier.
+ - `C++ Extension Pack` — recommended for C++ development, debugging and IntelliSense (e.g. `ms-vscode.cpptools`).
+
+You can also find these recommendations in `.vscode/extensions.json` to make it easy to install the recommended extensions in VS Code.
 
 ## Architecture & Structure
 This workspace follows the standard ROS 2 colcon workspace layout with Rust packages built via Cargo wrapped by CMake.
