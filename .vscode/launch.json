@@ -56,7 +56,7 @@
             "preLaunchTask": "build_rust_subscriber"
         },
         {
-            "name": "Rust Publisher",
+            "name": "Rust Publisher (LLDB)",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/install/rust_publisher/lib/rust_publisher/rust_publisher",
@@ -83,7 +83,7 @@
             "preLaunchTask": "build_rust_publisher"
         },
         {
-            "name": "Rust Subscriber",
+            "name": "Rust Subscriber (LLDB)",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/install/rust_subscriber/lib/rust_subscriber/rust_subscriber",

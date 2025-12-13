@@ -107,10 +107,20 @@ ls install/<package>/lib/<package>/
   - Ensure the debug configuration runs the binary from the `install/` tree or sets `cwd` to the package directory so relative paths resolve correctly.
   - Make sure the environment includes ROS 2: either launch VS Code from a shell where `source /opt/ros/jazzy/setup.bash` and `source install/setup.bash` were executed, or add environment variables in `launch.json` (for example set `LD_LIBRARY_PATH` to include `${workspaceFolder}/install/lib`).
 
+### Launch configurations — GDB vs LLDB
+
+This workspace includes two sets of debug launch configurations: one for **GDB** and one for **LLDB**. Each has trade-offs on typical Linux/macOS development systems:
+
+- **GDB**: Generally reliable for C/C++ and Rust debugging on Linux. Note: with the VS Code GDB configurations provided here you may encounter limitations when interacting with a running process from the UI — for example pausing a running program from the debugger or adding breakpoints dynamically while execution continues may not always behave as expected depending on the exact launch/attach mode. If you need to add breakpoints reliably at runtime, consider launching under the debugger with breakpoints set before starting or use an explicit attach workflow.
+
+- **LLDB**: Often used on macOS and supported on Linux, but LLDB can be noisy in mixed-language projects: it may stop frequently on low-level C++ traps/signals (e.g. platform traps) which makes stepping and continuing execution disruptive. When this becomes annoying, try disabling stopping-on-exception/trap options in the LLDB launch configuration or prefer the GDB configuration for routine runs.
+
+If one debugger proves inconvenient for your workflow, try the other or refine the `launch.json` settings (stop-on-entry, exception handling, and signal options) to reduce interruptions. The included `/.vscode/launch.json` contains separate configurations you can pick from in the Run and Debug view.
+
 ## VS Code Extensions (recommended)
 - `Rust Extension Pack` — provides the Rust language support, formatting, and useful tooling for editing and debugging Rust.
 - `CMake Tools` — makes editing, configuring and building CMake/CMakeLists-based projects (such as ROS 2 packages) inside VS Code much easier.
- - `C++ Extension Pack` — recommended for C++ development, debugging and IntelliSense (e.g. `ms-vscode.cpptools`).
+- `C++ Extension Pack` — recommended for C++ development, debugging and IntelliSense (e.g. `ms-vscode.cpptools`). Needed to use GDB.
 
 You can also find these recommendations in `.vscode/extensions.json` to make it easy to install the recommended extensions in VS Code.
 
